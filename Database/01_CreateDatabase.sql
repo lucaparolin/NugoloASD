@@ -1,5 +1,5 @@
 -- =============================================
--- AISSURE PILOT - Database Creation Script
+-- NugoloASD - Database Creation Script
 -- Multi-Tenant SaaS Platform for Sports Associations
 -- =============================================
 
@@ -7,23 +7,23 @@ USE master;
 GO
 
 -- Drop database if exists (ONLY FOR DEVELOPMENT)
-IF EXISTS (SELECT name FROM sys.databases WHERE name = 'AISSURE_Pilot')
+IF EXISTS (SELECT name FROM sys.databases WHERE name = 'NugoloASD')
 BEGIN
-    ALTER DATABASE AISSURE_Pilot SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-    DROP DATABASE AISSURE_Pilot;
+    ALTER DATABASE NugoloASD SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    DROP DATABASE NugoloASD;
 END
 GO
 
 -- Create database
-CREATE DATABASE AISSURE_Pilot;
+CREATE DATABASE NugoloASD;
 GO
 
-USE AISSURE_Pilot;
+USE NugoloASD;
 GO
 
 -- Enable snapshot isolation for better concurrency
-ALTER DATABASE AISSURE_Pilot SET READ_COMMITTED_SNAPSHOT ON;
+ALTER DATABASE NugoloASD SET READ_COMMITTED_SNAPSHOT ON;
 GO
 
-PRINT 'Database AISSURE_Pilot created successfully';
+PRINT 'Database NugoloASD created successfully';
 GO

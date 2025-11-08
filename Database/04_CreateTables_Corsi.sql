@@ -2,7 +2,7 @@
 -- TABELLE MODULO CORSI E ATTIVITÀ
 -- =============================================
 
-USE AISSURE_Pilot;
+USE NugoloASD;
 GO
 
 -- =============================================

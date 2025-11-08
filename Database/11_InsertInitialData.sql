@@ -3,7 +3,7 @@
 -- Ruoli, Permessi, Federazioni, Template
 -- =============================================
 
-USE AISSURE_Pilot;
+USE NugoloASD;
 GO
 
 -- =============================================

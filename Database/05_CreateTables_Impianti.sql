@@ -2,7 +2,7 @@
 -- TABELLE MODULO IMPIANTI E PRENOTAZIONI
 -- =============================================
 
-USE AISSURE_Pilot;
+USE NugoloASD;
 GO
 
 -- =============================================

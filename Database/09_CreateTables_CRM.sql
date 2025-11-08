@@ -2,7 +2,7 @@
 -- TABELLE MODULO CRM E FIDELIZZAZIONE
 -- =============================================
 
-USE AISSURE_Pilot;
+USE NugoloASD;
 GO
 
 -- =============================================

@@ -1,4 +1,4 @@
-# AISSURE Pilot - Database Schema
+# NugoloASD.Web - Database Schema
 
 ## Descrizione
 
@@ -142,15 +142,15 @@ Le stored procedures per le operazioni CRUD verranno create nel prossimo step de
 ### Backup
 
 ```sql
-BACKUP DATABASE AISSURE_Pilot
-TO DISK = 'C:\Backups\AISSURE_Pilot.bak'
+BACKUP DATABASE NugoloASD.Web
+TO DISK = 'C:\Backups\NugoloASD.Web.bak'
 WITH FORMAT;
 ```
 
 ### Restore
 
 ```sql
-RESTORE DATABASE AISSURE_Pilot
-FROM DISK = 'C:\Backups\AISSURE_Pilot.bak'
+RESTORE DATABASE NugoloASD.Web
+FROM DISK = 'C:\Backups\NugoloASD.Web.bak'
 WITH REPLACE;
 ```

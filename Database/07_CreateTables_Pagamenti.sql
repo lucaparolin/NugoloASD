@@ -3,7 +3,7 @@
 -- Pagamenti, Fatturazione, Contabilità
 -- =============================================
 
-USE AISSURE_Pilot;
+USE NugoloASD;
 GO
 
 -- =============================================

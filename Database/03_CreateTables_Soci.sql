@@ -2,7 +2,7 @@
 -- TABELLE MODULO SOCI E ANAGRAFICHE
 -- =============================================
 
-USE AISSURE_Pilot;
+USE NugoloASD;
 GO
 
 -- =============================================

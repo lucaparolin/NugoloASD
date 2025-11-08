@@ -2,7 +2,7 @@
 -- TABELLE CORE - Multi-Tenant e Autenticazione
 -- =============================================
 
-USE AISSURE_Pilot;
+USE NugoloASD;
 GO
 
 -- =============================================

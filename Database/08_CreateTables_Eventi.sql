@@ -2,7 +2,7 @@
 -- TABELLE MODULO EVENTI, GARE E TORNEI
 -- =============================================
 
-USE AISSURE_Pilot;
+USE NugoloASD;
 GO
 
 -- =============================================

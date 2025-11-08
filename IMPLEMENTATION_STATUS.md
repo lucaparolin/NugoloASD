@@ -1,4 +1,4 @@
-# AISSURE Pilot - Stato Implementazione
+# NugoloASD.Web - Stato Implementazione
 
 **Ultimo aggiornamento**: Novembre 2025
 

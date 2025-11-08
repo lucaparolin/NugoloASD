@@ -2,7 +2,7 @@
 -- TABELLE MODULO COMUNICAZIONI E NOTIFICHE
 -- =============================================
 
-USE AISSURE_Pilot;
+USE NugoloASD;
 GO
 
 -- =============================================

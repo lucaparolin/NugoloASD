@@ -1,4 +1,4 @@
-# Testing Guide - AISSURE Pilot
+# Testing Guide - NugoloASD.Web
 
 ## Compilazione e Test
 
@@ -10,7 +10,7 @@
 ### 1. Compilazione del Progetto
 
 ```bash
-cd AISSURE.Pilot
+cd NugoloASD.Web
 dotnet restore
 dotnet build
 ```
@@ -110,7 +110,7 @@ X-Tenant-Id: 1
 Dopo aver eseguito gli script SQL, verificare che le tabelle siano create:
 
 ```sql
-USE AISSURE_Pilot;
+USE NugoloASD.Web;
 
 -- Verifica tabelle core
 SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE';
@@ -153,7 +153,7 @@ dotnet build
 #### Errore: "A connection was successfully established with the server, but then an error occurred"
 - Verificare che SQL Server sia in esecuzione
 - Verificare la connection string in appsettings.json
-- Verificare che il database AISSURE_Pilot esista
+- Verificare che il database NugoloASD.Web esista
 
 #### Errore: 401 Unauthorized su API protette
 - Verificare di aver incluso l'header Authorization: Bearer TOKEN

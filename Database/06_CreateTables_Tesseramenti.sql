@@ -2,7 +2,7 @@
 -- TABELLE MODULO TESSERAMENTI E AFFILIAZIONI
 -- =============================================
 
-USE AISSURE_Pilot;
+USE NugoloASD;
 GO
 
 -- =============================================

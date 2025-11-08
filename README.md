@@ -1,10 +1,10 @@
-# AISSURE Pilot
+# NugoloASD.Web
 
 **Piattaforma SaaS Multi-Tenant per la Gestione di Associazioni Sportive Dilettantistiche**
 
 ## Descrizione
 
-AISSURE Pilot è una web application SaaS completa per la gestione di associazioni sportive dilettantistiche (ASD). La piattaforma offre un sistema multi-tenant che permette a più associazioni di operare in modo indipendente sullo stesso sistema, con completo isolamento dei dati.
+NugoloASD.Web è una web application SaaS completa per la gestione di associazioni sportive dilettantistiche (ASD). La piattaforma offre un sistema multi-tenant che permette a più associazioni di operare in modo indipendente sullo stesso sistema, con completo isolamento dei dati.
 
 ## Architettura Tecnologica
 
@@ -20,7 +20,7 @@ AISSURE Pilot è una web application SaaS completa per la gestione di associazio
 ## Struttura del Progetto
 
 ```
-AISSURE.Pilot/
+NugoloASD.Web/
 ├── API/                      # Controller API REST
 ├── Controllers/              # Controller MVC per le Views
 ├── Data/                     # Factory per connessioni database
@@ -152,12 +152,12 @@ Modificare `appsettings.json`:
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=YOUR_SERVER;Database=AISSURE_Pilot;User Id=YOUR_USER;Password=YOUR_PASSWORD;TrustServerCertificate=True;"
+    "DefaultConnection": "Server=YOUR_SERVER;Database=NugoloASD.Web;User Id=YOUR_USER;Password=YOUR_PASSWORD;TrustServerCertificate=True;"
   },
   "JwtSettings": {
     "SecretKey": "CHANGE_THIS_TO_A_SECURE_SECRET_KEY_AT_LEAST_32_CHARS",
-    "Issuer": "AISSURE.Pilot",
-    "Audience": "AISSURE.Pilot.Users",
+    "Issuer": "NugoloASD.Web",
+    "Audience": "NugoloASD.Web.Users",
     "ExpirationInMinutes": 1440
   }
 }
@@ -166,7 +166,7 @@ Modificare `appsettings.json`:
 ### 4. Avviare l'Applicazione
 
 ```bash
-cd AISSURE.Pilot
+cd NugoloASD.Web
 dotnet restore
 dotnet build
 dotnet run
