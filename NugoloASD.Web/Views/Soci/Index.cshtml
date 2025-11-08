@@ -1,0 +1,269 @@
+@model NugoloASD.Web.ViewModels.Soci.SocioIndexViewModel
+@{
+    ViewData["Title"] = "Soci";
+}
+
+<div class="page-header d-flex align-items-center justify-content-between mb-4">
+    <div>
+        <h1 class="page-title">Gestione Soci</h1>
+        <p class="page-subtitle">Anagrafica completa dei soci dell'associazione</p>
+    </div>
+    <a href="@Url.Action("Create")" class="btn btn-primary">
+        <i class="bi bi-plus-lg me-2"></i>Nuovo Socio
+    </a>
+</div>
+
+<!-- Statistiche -->
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="rounded-circle bg-primary bg-opacity-10 p-3">
+                        <i class="bi bi-people-fill fs-4 text-primary"></i>
+                    </div>
+                    <div>
+                        <h3 class="fs-2 fw-bold mb-0">@Model.Statistiche.TotaleSoci</h3>
+                        <p class="text-muted mb-0 small">Totale Soci</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="rounded-circle bg-success bg-opacity-10 p-3">
+                        <i class="bi bi-check-circle-fill fs-4 text-success"></i>
+                    </div>
+                    <div>
+                        <h3 class="fs-2 fw-bold mb-0">@Model.Statistiche.SociAttivi</h3>
+                        <p class="text-muted mb-0 small">Soci Attivi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="rounded-circle bg-warning bg-opacity-10 p-3">
+                        <i class="bi bi-exclamation-triangle-fill fs-4 text-warning"></i>
+                    </div>
+                    <div>
+                        <h3 class="fs-2 fw-bold mb-0">@Model.Statistiche.CertificatiInScadenza</h3>
+                        <p class="text-muted mb-0 small">Certificati in Scadenza</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filtri e Tabella -->
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-white border-0">
+        <div class="d-flex align-items-center justify-content-between">
+            <h5 class="mb-0 fw-semibold">Elenco Soci</h5>
+            <button class="btn btn-sm btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#filtriCollapse"
+                    aria-expanded="false" aria-label="Mostra/Nascondi filtri">
+                <i class="bi bi-funnel"></i> Filtri
+            </button>
+        </div>
+    </div>
+
+    <!-- Filtri -->
+    <div class="collapse" id="filtriCollapse">
+        <div class="card-body border-bottom">
+            <form asp-action="Index" method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label asp-for="Filtri.SearchTerm" class="form-label">Cerca</label>
+                    <input asp-for="Filtri.SearchTerm" class="form-control"
+                           placeholder="Nome, cognome, CF, email..." />
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="Filtri.TipoSocio" class="form-label">Tipo Socio</label>
+                    <select asp-for="Filtri.TipoSocio" class="form-select">
+                        <option value="">Tutti</option>
+                        <option value="Tesserato">Tesserato</option>
+                        <option value="Atleta">Atleta</option>
+                        <option value="Istruttore">Istruttore</option>
+                        <option value="Dirigente">Dirigente</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label d-block">&nbsp;</label>
+                    <div class="form-check">
+                        <input asp-for="Filtri.SoloAttivi" class="form-check-input" type="checkbox" />
+                        <label asp-for="Filtri.SoloAttivi" class="form-check-label">
+                            Solo Attivi
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3 d-flex align-items-end gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-search"></i> Cerca
+                    </button>
+                    <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                        <i class="bi bi-x-lg"></i> Reset
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle" id="sociTable">
+                <thead>
+                    <tr>
+                        <th>Nome Cognome</th>
+                        <th>Codice Fiscale</th>
+                        <th>Email</th>
+                        <th>Telefono</th>
+                        <th>Tipo</th>
+                        <th>Certificato</th>
+                        <th>Stato</th>
+                        <th class="text-end">Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var socio in Model.Soci)
+                    {
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="rounded-circle bg-primary bg-opacity-10 p-2 flex-shrink-0"
+                                         style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                        <span class="fw-bold text-primary">@socio.Nome.Substring(0, 1)@socio.Cognome.Substring(0, 1)</span>
+                                    </div>
+                                    <div>
+                                        <div class="fw-semibold">@socio.NomeCompleto</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="font-monospace">@socio.CodiceFiscale</span></td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(socio.Email))
+                                {
+                                    <a href="mailto:@socio.Email" class="text-decoration-none">@socio.Email</a>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">-</span>
+                                }
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(socio.Telefono))
+                                {
+                                    <a href="tel:@socio.Telefono" class="text-decoration-none">@socio.Telefono</a>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">-</span>
+                                }
+                            </td>
+                            <td><span class="badge bg-secondary-subtle text-secondary">@socio.TipoSocio</span></td>
+                            <td>
+                                @if (socio.CertificatoMedicoValido)
+                                {
+                                    <span class="badge bg-success-subtle text-success">
+                                        <i class="bi bi-check-circle"></i> Valido
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger-subtle text-danger">
+                                        <i class="bi bi-x-circle"></i> Scaduto
+                                    </span>
+                                }
+                            </td>
+                            <td>
+                                @if (socio.Attivo)
+                                {
+                                    <span class="badge bg-success">Attivo</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Non Attivo</span>
+                                }
+                            </td>
+                            <td class="text-end">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a href="@Url.Action("Details", new { id = socio.SocioId })"
+                                       class="btn btn-outline-primary" title="Dettagli" aria-label="Visualizza dettagli @socio.NomeCompleto">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a href="@Url.Action("Edit", new { id = socio.SocioId })"
+                                       class="btn btn-outline-secondary" title="Modifica" aria-label="Modifica @socio.NomeCompleto">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-outline-danger" title="Elimina"
+                                            data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                            data-socio-id="@socio.SocioId" data-socio-nome="@socio.NomeCompleto"
+                                            aria-label="Elimina @socio.NomeCompleto">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Conferma Eliminazione -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Conferma Eliminazione</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+            </div>
+            <div class="modal-body">
+                Sei sicuro di voler eliminare il socio <strong id="deleteSocioNome"></strong>?
+                <br /><small class="text-muted">Questa operazione non può essere annullata.</small>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                <form id="deleteForm" method="post" class="d-inline">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">Elimina</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Inizializza DataTable
+            $('#sociTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/it-IT.json'
+                },
+                pageLength: 25,
+                order: [[0, 'asc']],
+                columnDefs: [
+                    { orderable: false, targets: -1 }
+                ]
+            });
+
+            // Modal eliminazione
+            const deleteModal = document.getElementById('deleteModal');
+            deleteModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                const socioId = button.getAttribute('data-socio-id');
+                const socioNome = button.getAttribute('data-socio-nome');
+
+                document.getElementById('deleteSocioNome').textContent = socioNome;
+                document.getElementById('deleteForm').action = '@Url.Action("Delete")/' + socioId;
+            });
+        });
+    </script>
+}

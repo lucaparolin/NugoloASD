@@ -13,7 +13,8 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        // Redirect alla dashboard
+        return RedirectToAction("Index", "Dashboard");
     }
 
     public IActionResult Dashboard()

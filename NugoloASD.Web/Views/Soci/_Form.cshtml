@@ -1,0 +1,255 @@
+@model NugoloASD.Web.ViewModels.Soci.SocioFormViewModel
+
+<div class="row g-4">
+    <!-- Dati Anagrafici -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white">
+                <h5 class="mb-0 fw-semibold"><i class="bi bi-person-vcard me-2"></i>Dati Anagrafici</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="Nome" class="form-label"></label>
+                        <input asp-for="Nome" class="form-control" placeholder="Inserisci il nome" autofocus />
+                        <span asp-validation-for="Nome" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Cognome" class="form-label"></label>
+                        <input asp-for="Cognome" class="form-control" placeholder="Inserisci il cognome" />
+                        <span asp-validation-for="Cognome" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="CodiceFiscale" class="form-label"></label>
+                        <input asp-for="CodiceFiscale" class="form-control text-uppercase" placeholder="RSSMRA80A01H501U"
+                               style="font-family: monospace;" maxlength="16" />
+                        <span asp-validation-for="CodiceFiscale" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="DataNascita" class="form-label"></label>
+                        <input asp-for="DataNascita" class="form-control" type="date" />
+                        <span asp-validation-for="DataNascita" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="Sesso" class="form-label"></label>
+                        <select asp-for="Sesso" class="form-select">
+                            <option value="M">Maschio</option>
+                            <option value="F">Femmina</option>
+                        </select>
+                        <span asp-validation-for="Sesso" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <label asp-for="LuogoNascita" class="form-label"></label>
+                        <input asp-for="LuogoNascita" class="form-control" placeholder="Città di nascita" />
+                        <span asp-validation-for="LuogoNascita" class="text-danger small"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contatti e Residenza -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white">
+                <h5 class="mb-0 fw-semibold"><i class="bi bi-envelope me-2"></i>Contatti e Residenza</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label asp-for="Email" class="form-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                            <input asp-for="Email" class="form-control" type="email" placeholder="email@esempio.it" />
+                        </div>
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="Telefono" class="form-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                            <input asp-for="Telefono" class="form-control" placeholder="0123456789" />
+                        </div>
+                        <span asp-validation-for="Telefono" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="Cellulare" class="form-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-phone"></i></span>
+                            <input asp-for="Cellulare" class="form-control" placeholder="3331234567" />
+                        </div>
+                        <span asp-validation-for="Cellulare" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <label asp-for="Indirizzo" class="form-label"></label>
+                        <input asp-for="Indirizzo" class="form-control" placeholder="Via, numero civico" />
+                        <span asp-validation-for="Indirizzo" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Citta" class="form-label"></label>
+                        <input asp-for="Citta" class="form-control" placeholder="Città" />
+                        <span asp-validation-for="Citta" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="CAP" class="form-label"></label>
+                        <input asp-for="CAP" class="form-control" placeholder="12345" maxlength="5" />
+                        <span asp-validation-for="CAP" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="Provincia" class="form-label"></label>
+                        <input asp-for="Provincia" class="form-control text-uppercase" placeholder="RM" maxlength="2" />
+                        <span asp-validation-for="Provincia" class="text-danger small"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tipo Socio e Stato -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white">
+                <h5 class="mb-0 fw-semibold"><i class="bi bi-person-badge me-2"></i>Tipo e Stato</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="TipoSocio" class="form-label"></label>
+                        <select asp-for="TipoSocio" class="form-select">
+                            <option value="Tesserato">Tesserato</option>
+                            <option value="Atleta">Atleta</option>
+                            <option value="Istruttore">Istruttore</option>
+                            <option value="Dirigente">Dirigente</option>
+                            <option value="Altro">Altro</option>
+                        </select>
+                        <span asp-validation-for="TipoSocio" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div class="form-check form-switch">
+                            <input asp-for="Attivo" class="form-check-input" type="checkbox" />
+                            <label asp-for="Attivo" class="form-check-label"></label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check form-switch">
+                            <input asp-for="Minorenne" class="form-check-input" type="checkbox" id="minorenneCheck" />
+                            <label asp-for="Minorenne" class="form-check-label"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dati Genitore (se minorenne) -->
+    <div class="col-12" id="datiGenitore" style="display: none;">
+        <div class="card border-0 shadow-sm border-warning">
+            <div class="card-header bg-warning bg-opacity-10">
+                <h5 class="mb-0 fw-semibold text-warning"><i class="bi bi-person-check me-2"></i>Dati Genitore/Tutore</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label asp-for="NomeGenitore" class="form-label"></label>
+                        <input asp-for="NomeGenitore" class="form-control" />
+                        <span asp-validation-for="NomeGenitore" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="CognomeGenitore" class="form-label"></label>
+                        <input asp-for="CognomeGenitore" class="form-control" />
+                        <span asp-validation-for="CognomeGenitore" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="TelefonoGenitore" class="form-label"></label>
+                        <input asp-for="TelefonoGenitore" class="form-control" />
+                        <span asp-validation-for="TelefonoGenitore" class="text-danger small"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificato Medico -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white">
+                <h5 class="mb-0 fw-semibold"><i class="bi bi-heart-pulse me-2"></i>Certificato Medico</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="DataScadenzaCertificatoMedico" class="form-label"></label>
+                        <input asp-for="DataScadenzaCertificatoMedico" class="form-control" type="date" />
+                        <span asp-validation-for="DataScadenzaCertificatoMedico" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <label asp-for="NoteMediche" class="form-label"></label>
+                        <textarea asp-for="NoteMediche" class="form-control" rows="3"
+                                  placeholder="Eventuali note mediche, allergie, patologie..."></textarea>
+                        <span asp-validation-for="NoteMediche" class="text-danger small"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy e Note -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white">
+                <h5 class="mb-0 fw-semibold"><i class="bi bi-shield-check me-2"></i>Privacy e Note</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input asp-for="ConsensoPrivacy" class="form-check-input" type="checkbox" required />
+                            <label asp-for="ConsensoPrivacy" class="form-check-label">
+                                Acconsento al trattamento dei dati personali (obbligatorio) <span class="text-danger">*</span>
+                            </label>
+                            <span asp-validation-for="ConsensoPrivacy" class="text-danger small d-block"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input asp-for="ConsensoMarketing" class="form-check-input" type="checkbox" />
+                            <label asp-for="ConsensoMarketing" class="form-check-label">
+                                Acconsento all'invio di comunicazioni promozionali (facoltativo)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label asp-for="Note" class="form-label"></label>
+                        <textarea asp-for="Note" class="form-control" rows="3"
+                                  placeholder="Note aggiuntive sul socio..."></textarea>
+                        <span asp-validation-for="Note" class="text-danger small"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Mostra/nascondi dati genitore in base al checkbox minorenne
+        function toggleDatiGenitore() {
+            const isMinorenne = document.getElementById('minorenneCheck').checked;
+            document.getElementById('datiGenitore').style.display = isMinorenne ? 'block' : 'none';
+        }
+
+        document.getElementById('minorenneCheck').addEventListener('change', toggleDatiGenitore);
+        document.addEventListener('DOMContentLoaded', toggleDatiGenitore);
+
+        // Converti codice fiscale in maiuscolo
+        document.querySelector('input[name="CodiceFiscale"]').addEventListener('input', function(e) {
+            e.target.value = e.target.value.toUpperCase();
+        });
+
+        // Converti provincia in maiuscolo
+        document.querySelector('input[name="Provincia"]').addEventListener('input', function(e) {
+            e.target.value = e.target.value.toUpperCase();
+        });
+    </script>
+}

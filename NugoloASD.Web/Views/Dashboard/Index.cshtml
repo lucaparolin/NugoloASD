@@ -1,0 +1,288 @@
+@model NugoloASD.Web.ViewModels.Dashboard.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="page-header">
+    <h1 class="page-title">Dashboard</h1>
+    <p class="page-subtitle">Panoramica generale dell'associazione sportiva</p>
+</div>
+
+<!-- KPI Cards -->
+<div class="row g-4 mb-4">
+    <!-- Soci Attivi -->
+    <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="rounded-circle bg-primary bg-opacity-10 p-3">
+                            <i class="bi bi-people-fill fs-4 text-primary"></i>
+                        </div>
+                    </div>
+                    @if (Model.Kpi.PercentualeVariazioneSoci > 0)
+                    {
+                        <span class="badge bg-success-subtle text-success">
+                            <i class="bi bi-arrow-up"></i> @Model.Kpi.PercentualeVariazioneSoci.ToString("0.0")%
+                        </span>
+                    }
+                </div>
+                <h3 class="fs-2 fw-bold mb-1">@Model.Kpi.SociAttivi</h3>
+                <p class="text-muted mb-0 small">Soci Attivi</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Corsi Attivi -->
+    <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="rounded-circle bg-info bg-opacity-10 p-3">
+                            <i class="bi bi-book-fill fs-4 text-info"></i>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="fs-2 fw-bold mb-1">@Model.Kpi.CorsiAttivi</h3>
+                <p class="text-muted mb-0 small">Corsi Attivi</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Incassi Mese -->
+    <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="rounded-circle bg-success bg-opacity-10 p-3">
+                            <i class="bi bi-currency-euro fs-4 text-success"></i>
+                        </div>
+                    </div>
+                    @if (Model.Kpi.PercentualeVariazioneIncassi > 0)
+                    {
+                        <span class="badge bg-success-subtle text-success">
+                            <i class="bi bi-arrow-up"></i> @Model.Kpi.PercentualeVariazioneIncassi.ToString("0.0")%
+                        </span>
+                    }
+                </div>
+                <h3 class="fs-2 fw-bold mb-1">€@Model.Kpi.IncassiMese.ToString("N0")</h3>
+                <p class="text-muted mb-0 small">Incassi del Mese</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tesseramenti in Scadenza -->
+    <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="rounded-circle bg-warning bg-opacity-10 p-3">
+                            <i class="bi bi-exclamation-triangle-fill fs-4 text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="fs-2 fw-bold mb-1">@Model.Kpi.TesseramentiInScadenza</h3>
+                <p class="text-muted mb-0 small">In Scadenza (30gg)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Grafici -->
+<div class="row g-4 mb-4">
+    <!-- Grafico Iscrizioni -->
+    <div class="col-12 col-lg-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0 fw-semibold">Andamento Iscrizioni</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="chartIscrizioni" height="250"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grafico Incassi -->
+    <div class="col-12 col-lg-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="mb-0 fw-semibold">Andamento Incassi</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="chartIncassi" height="250"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Attività Recenti e Scadenze -->
+<div class="row g-4">
+    <!-- Attività Recenti -->
+    <div class="col-12 col-lg-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 d-flex align-items-center justify-content-between">
+                <h5 class="mb-0 fw-semibold">Attività Recenti</h5>
+                <a href="#" class="btn btn-sm btn-link text-decoration-none">Vedi tutte</a>
+            </div>
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                    @foreach (var attivita in Model.AttivitaRecenti)
+                    {
+                        <div class="list-group-item border-0 px-4 py-3">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="rounded-circle bg-@(attivita.ColorClass) bg-opacity-10 p-2 flex-shrink-0">
+                                    <i class="@attivita.Icona text-@(attivita.ColorClass)"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1 fw-semibold">@attivita.Tipo</h6>
+                                    <p class="mb-1 small text-muted">@attivita.Descrizione</p>
+                                    <p class="mb-0 small text-muted">
+                                        <i class="bi bi-clock"></i> @attivita.Data.ToString("HH:mm")
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scadenze Imminenti -->
+    <div class="col-12 col-lg-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 d-flex align-items-center justify-content-between">
+                <h5 class="mb-0 fw-semibold">Scadenze Imminenti</h5>
+                <a href="@Url.Action("Index", "Tesseramenti")" class="btn btn-sm btn-link text-decoration-none">Vedi tutte</a>
+            </div>
+            <div class="card-body p-0">
+                @if (Model.ScadenzeImminenti.Any())
+                {
+                    <div class="list-group list-group-flush">
+                        @foreach (var scadenza in Model.ScadenzeImminenti)
+                        {
+                            <div class="list-group-item border-0 px-4 py-3">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <h6 class="mb-1 fw-semibold">@scadenza.Descrizione</h6>
+                                        <p class="mb-0 small text-muted">
+                                            <i class="bi bi-calendar"></i> @scadenza.DataScadenza.ToString("dd/MM/yyyy")
+                                        </p>
+                                    </div>
+                                    <span class="badge bg-@(scadenza.PrioritaClass)-subtle text-@(scadenza.PrioritaClass)">
+                                        @scadenza.GiorniMancanti gg
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="p-4 text-center text-muted">
+                        <i class="bi bi-check-circle fs-1 mb-2 d-block"></i>
+                        <p class="mb-0">Nessuna scadenza imminente</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <script>
+        // Configurazione globale Chart.js
+        Chart.defaults.font.family = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+        Chart.defaults.color = '#64748b';
+
+        // Grafico Iscrizioni
+        const ctxIscrizioni = document.getElementById('chartIscrizioni').getContext('2d');
+        new Chart(ctxIscrizioni, {
+            type: 'line',
+            data: {
+                labels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.GraficoIscrizioni.Labels)),
+                datasets: [{
+                    label: 'Numero Soci',
+                    data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.GraficoIscrizioni.Values)),
+                    borderColor: 'rgb(79, 70, 229)',
+                    backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#f1f5f9'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Grafico Incassi
+        const ctxIncassi = document.getElementById('chartIncassi').getContext('2d');
+        new Chart(ctxIncassi, {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.GraficoIncassi.Labels)),
+                datasets: [{
+                    label: 'Incassi (€)',
+                    data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.GraficoIncassi.Values)),
+                    backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                    borderColor: 'rgb(16, 185, 129)',
+                    borderWidth: 1,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#f1f5f9'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return '€' + value.toLocaleString('it-IT');
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+}

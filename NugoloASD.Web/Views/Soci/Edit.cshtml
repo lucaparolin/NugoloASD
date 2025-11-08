@@ -1,0 +1,41 @@
+@model NugoloASD.Web.ViewModels.Soci.SocioFormViewModel
+@{
+    ViewData["Title"] = $"Modifica Socio - {Model.Nome} {Model.Cognome}";
+}
+
+<div class="page-header mb-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Dashboard")">Home</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index")">Soci</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Modifica</li>
+        </ol>
+    </nav>
+    <h1 class="page-title">Modifica Socio</h1>
+    <p class="page-subtitle">Aggiorna i dati di @Model.Nome @Model.Cognome</p>
+</div>
+
+<form asp-action="Edit" method="post" class="needs-validation" novalidate>
+    @Html.AntiForgeryToken()
+    <input asp-for="SocioId" type="hidden" />
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            <strong>Errore!</strong> Correggi gli errori evidenziati nel form.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Chiudi"></button>
+        </div>
+    }
+
+    <partial name="_Form" model="Model" />
+
+    <div class="d-flex gap-2 justify-content-end mt-4">
+        <a href="@Url.Action("Details", new { id = Model.SocioId })" class="btn btn-outline-secondary">
+            <i class="bi bi-x-lg me-2"></i>Annulla
+        </a>
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-check-lg me-2"></i>Salva Modifiche
+        </button>
+    </div>
+</form>
